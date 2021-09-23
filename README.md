@@ -29,6 +29,8 @@ Passing these two values as props to the Radviz React component will result grap
 ## Link
 Please checkout and share this React component. Also checkout the Observable notebook and play around with a demo.
 
-DEMO: https://observablehq.com/@gzakhar/radviz
+DEMO: https://viz-research.herokuapp.com/
+
+OBSERVABLE: https://observablehq.com/@gzakhar/radviz
 
 EMAIL: georgy.zakhar@gmail.com
