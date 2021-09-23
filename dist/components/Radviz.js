@@ -7,9 +7,9 @@ exports.default = void 0;
 
 require("core-js/modules/web.dom-collections.iterator.js");
 
-var _d3Selection = require("d3-selection");
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _d3Selection = require("d3-selection");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -20,8 +20,9 @@ let borderColor = '#DDDDDD';
 function Radviz(props) {
   let CHART_R = 200;
   let MARGIN = 50;
+  let svgRef = (0, _react.useRef)(null);
   (0, _react.useEffect)(() => {
-    let svg = (0, _d3Selection.select)('svg');
+    let svg = (0, _d3Selection.select)(svgRef.current);
     svg.select('defs').remove();
     let defs = svg.append('defs');
     colorInCircumfrence(svg, defs, CHART_R, MARGIN);
@@ -42,6 +43,7 @@ function Radviz(props) {
     }
   });
   return /*#__PURE__*/_react.default.createElement("svg", {
+    ref: svgRef,
     viewBox: "0 0 500 500"
   });
 }
@@ -74,7 +76,7 @@ let printLabels = (dial, labels, CHART_R, defs) => {
   }
 
   defs.selectAll('g').append('g').data(arcs).enter().append('path').attr('id', (_, i) => "labelPath".concat(i)).attr('d', d => d);
-  dial.selectAll().append('g').data(labels).enter().append('text').attr('text-anchor', 'middle').append('textPath').attr('xlink:href', (_, i) => "#labelPath".concat(i)).attr('startOffset', '50%').style('font-family', 'sans-serif').style('font-size', '24px').style('font-weight', '600').style('fill-opacity', 1).style('cursor', 'default').text(d => d.anchor.toUpperCase()).attr('id', 'anchor-labels');
+  dial.selectAll().append('g').data(labels).enter().append('text').attr('text-anchor', 'middle').append('textPath').attr('xlink:href', (_, i) => "#labelPath".concat(i)).attr('startOffset', '50%').style('font-family', 'sans-serif').style('font-size', '24px').style('font-weight', '600').style('fill-opacity', 1).style('cursor', 'default').text(d => d.anchor).attr('id', 'anchor-labels');
 }; // Draw anchors 
 
 

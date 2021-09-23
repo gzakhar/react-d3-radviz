@@ -8,11 +8,11 @@ function Radviz(props) {
 	let MARGIN = 50;
 
 	let svgRef = useRef(null)
-
+	
 	useEffect(() => {
-
-		let svg = select(svgRef.current)
 		
+		let svg = select(svgRef.current)
+
 		svg.select('defs').remove()
 		let defs = svg.append('defs')
 
@@ -152,7 +152,7 @@ function handleHoverOn(i, d) {
 		// .attr('x', d.coordinates.x - 10)
 		// .attr('y', d.coordinates.y - 10)
 		.text(d.textFloater)
-		
+
 }
 
 function handleHoverOff(i, d) {

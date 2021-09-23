@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react'
 import { radvizMapper, Radviz } from './lib/index.js';
 
 function App() {

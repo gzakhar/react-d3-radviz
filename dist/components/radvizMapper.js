@@ -170,28 +170,28 @@ function radvizMapper(data, labelTextMapping, labelAngleMapping) {
         };
       } // if slope of border function is (effective) undefined.
       else if (a > 10000000) {
-          func[i] = theta => {
-            let a2 = Math.tan(theta);
-            let x = xIntersept;
-            let y = a2 * x;
-            return hypotneous(x, y);
-          };
-        } // else border function is regular
-        else {
-            func[i] = theta => {
-              let thetaRonded = round(theta, ROUND_TO); // if tan(theta) undefined
+        func[i] = theta => {
+          let a2 = Math.tan(theta);
+          let x = xIntersept;
+          let y = a2 * x;
+          return hypotneous(x, y);
+        };
+      } // else border function is regular
+      else {
+        func[i] = theta => {
+          let thetaRonded = round(theta, ROUND_TO); // if tan(theta) undefined
 
-              if (thetaRonded == round(Math.PI / 2, ROUND_TO) || thetaRonded == round(3 * Math.PI / 2, ROUND_TO)) {
-                // find intersection with x = 0 and y=ax+b
-                return round(Math.abs(b), ROUND_TO);
-              }
-
-              let a2 = Math.tan(theta);
-              let x = round(-b / (a - a2), ROUND_TO);
-              let y = round(a2 * x, ROUND_TO);
-              return hypotneous(x, y);
-            };
+          if (thetaRonded == round(Math.PI / 2, ROUND_TO) || thetaRonded == round(3 * Math.PI / 2, ROUND_TO)) {
+            // find intersection with x = 0 and y=ax+b
+            return round(Math.abs(b), ROUND_TO);
           }
+
+          let a2 = Math.tan(theta);
+          let x = round(-b / (a - a2), ROUND_TO);
+          let y = round(a2 * x, ROUND_TO);
+          return hypotneous(x, y);
+        };
+      }
     });
     return func;
   })();
