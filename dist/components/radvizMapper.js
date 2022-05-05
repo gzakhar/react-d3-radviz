@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.hypotneous = exports.getTheta = exports.dotY = exports.dotX = exports.default = void 0;
 
 require("core-js/modules/es.array.sort.js");
 
@@ -21,11 +21,14 @@ const ROUND_TO = 10000;
 
 let dotY = (radius, theta) => radius * Math.sin(theta);
 
+exports.dotY = dotY;
+
 let dotX = (radius, theta) => radius * Math.cos(theta);
 
-let deg2rad = deg => deg * Math.PI / 180;
+exports.dotX = dotX;
 
-let rad2deg = rad => rad * 180 / Math.PI;
+let deg2rad = deg => deg * Math.PI / 180; // let rad2deg = rad => rad * 180 / Math.PI;
+
 
 let getTheta = (x, y) => {
   if (y < 0) {
@@ -35,12 +38,16 @@ let getTheta = (x, y) => {
   return Math.atan2(y, x);
 };
 
+exports.getTheta = getTheta;
+
 let hypotneous = (x, y) => Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+
+exports.hypotneous = hypotneous;
 
 let round = (number, roundTo) => Math.round(roundTo * number) / roundTo;
 
 let slope = (x1, x2, y1, y2) => {
-  if (Math.abs(x1 - x2) != 0) {
+  if (Math.abs(x1 - x2) !== 0) {
     return (y2 - y1) / (x2 - x1);
   }
 
@@ -66,7 +73,7 @@ let mapRadvizpoint = (row, anchorInfo) => {
   Object.keys(anchorInfo).forEach((anchor, i) => {
     let pointRadius = anchorInfo[anchor].normalization(row[anchor]);
 
-    if (pointRadius != 0) {
+    if (pointRadius !== 0) {
       let angle = anchorInfo[anchor].angle;
       x += round(dotX(pointRadius, angle), ROUND_TO);
       y += round(dotY(pointRadius, angle), ROUND_TO);
@@ -74,7 +81,7 @@ let mapRadvizpoint = (row, anchorInfo) => {
     }
   }); // console.log('norm: ', row)
 
-  if (sumUnits != 0) {
+  if (sumUnits !== 0) {
     let scaling = 1 / sumUnits; // Radvix Scaling
 
     x = scaling * x;
@@ -107,8 +114,7 @@ function radvizMapper(data, labelTextMapping, labelAngleMapping) {
   labels.sort((f, s) => labelAngleMapping[f] - labelAngleMapping[s]); // console.log('sorted-array-of-labels: ', labels)
 
   let numberOfAnchors = labels.length; // Mappings from label to angle of label
-
-  let labelDomain = [0, 2 * Math.PI];
+  // let labelDomain = [0, 2 * Math.PI];
 
   let label2Theta = label => deg2rad(labelAngleMapping[label]);
 
@@ -157,7 +163,7 @@ function radvizMapper(data, labelTextMapping, labelAngleMapping) {
         func[i] = theta => {
           let thetaRonded = round(theta, ROUND_TO); // if tan(theta) undefined
 
-          if (thetaRonded == round(Math.PI / 2, ROUND_TO) || thetaRonded == round(3 * Math.PI / 2, ROUND_TO)) {
+          if (thetaRonded === round(Math.PI / 2, ROUND_TO) || thetaRonded === round(3 * Math.PI / 2, ROUND_TO)) {
             // find intersection with x = 0 and y=ax+b
             return round(Math.abs(b), ROUND_TO);
           } // if not y = b
@@ -181,7 +187,7 @@ function radvizMapper(data, labelTextMapping, labelAngleMapping) {
         func[i] = theta => {
           let thetaRonded = round(theta, ROUND_TO); // if tan(theta) undefined
 
-          if (thetaRonded == round(Math.PI / 2, ROUND_TO) || thetaRonded == round(3 * Math.PI / 2, ROUND_TO)) {
+          if (thetaRonded === round(Math.PI / 2, ROUND_TO) || thetaRonded === round(3 * Math.PI / 2, ROUND_TO)) {
             // find intersection with x = 0 and y=ax+b
             return round(Math.abs(b), ROUND_TO);
           }

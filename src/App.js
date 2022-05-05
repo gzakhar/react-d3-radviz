@@ -391,13 +391,28 @@ function App() {
       "income_per_capita": 1018369
     }
   ]
-  
+
   let { points, labels } = radvizMapper(data, labelMapping, labelAngles, 'county_name')
 
   return (
     <div className="App">
       <header className="App-header">
-        <Radviz points={points} labels={labels} />
+        <table style={{width: '100%'}}>
+          <tbody>
+
+            <tr>
+              <td><Radviz /></td>
+              <td><Radviz labels={labels} /></td>
+              <td><Radviz points={points} /></td>
+            </tr>
+            <tr>
+              <td><Radviz zoom={true} points={points} labels={labels} /></td>
+              <td><Radviz points={points} labels={labels} /></td>
+              <td><Radviz points={points} labels={labels} /></td>
+            </tr>
+          </tbody>
+        </table>
+
       </header>
     </div>
   );
